@@ -51,7 +51,7 @@ function Object-memberOf-In-domain(){
 	$strChaine = "<-" + $strObjetDomainFQDN + "\" + $strObjetsamAccountNAme  + $strChaine 
 	#Write-host $strChaine 
 	$aNetMem = @{}
-	Write-host (("`t"*$iNiv) + $strObjetDomainFQDN +"\"+ $strObjetsamAccountNAme + "***"+ $strDomainFQDN)
+	#write-host (("`t"*$iNiv) + $strObjetDomainFQDN +"\"+ $strObjetsamAccountNAme + "***"+ $strDomainFQDN)
 	$oSearcher = New-Object System.DirectoryServices.DirectorySearcher
 	$oSearcher.SearchRoot = "LDAP://" +$strDomainFQDN +"/DC=" + $strDomainFQDN.replace(".",",DC=") 
     $oSearcher.PageSize = 1000
@@ -77,7 +77,7 @@ function Object-memberOf-In-domain(){
     }
 	else {
 	    $strObjectSID = (New-Object System.Security.Principal.SecurityIdentifier(($oObject.objectSid).value,0)).tostring()
-		#write-host ("(member=" +"CN=" +$strObjectSID + ",CN=ForeignSecurityPrincipals,DC=" + $strDomainFQDN.replace(".",",DC=") + ")")
+		##write-host ("(member=" +"CN=" +$strObjectSID + ",CN=ForeignSecurityPrincipals,DC=" + $strDomainFQDN.replace(".",",DC=") + ")")
         $oSearcher.Filter = "(member=" +"CN=" +$strObjectSID + ",CN=ForeignSecurityPrincipals,DC=" + $strDomainFQDN.replace(".",",DC=") + ")"
 		try {
 			$oResults=$oSearcher.findall()
@@ -181,8 +181,6 @@ $aObjetDomainGroups=Object-memberOf-In-domain $oObject $ObjectDomain
 $Allgroups += $aObjetDomainGroups 
 $aTrustingDomains = GetTrustingDomains $ObjectDomain
 foreach ($strDomainFQDN in $aTrustingDomains.keys){
-	$strDomainFQDN 
-	$aTrustingDomains[$strDomainFQDN]
 	$err1=$false
 	$objDomainContext= New-Object System.DirectoryServices.ActiveDirectory.DirectoryContext('domain',$strDomainFQDN)
 	try{
