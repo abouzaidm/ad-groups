@@ -1,7 +1,7 @@
 # ad-groups
 Simple Powershell script to list all user groups including groups in trussing domains and forests
 ## Usage
-` .\get-AllUserGroups.ps1 <object(user,group,computer,...)> <object samaccountname> <object fqdn domain name>`
+` .\get-AllUserGroups.ps1 <object(user,group,computer,...) samaccountname> <object fqdn domain name>`
 ## Output
 Four colomns  separated by TAB are sent to the stadard output, it can be redirected to a file and opened by Excel 
 
